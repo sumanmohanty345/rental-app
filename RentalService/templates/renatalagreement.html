@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+<form action="{% url  'saverentalagreement' %}" method="post">
+    {% csrf_token %}
+  <table class="table" align="center" style="width:400px; height: 400px" >
+ <tr style="height: 10px">
+     <td colspan="4" bgcolor="#1e90ff" style="font-family: 'Baskerville Old Face'"><font color="#f0f8ff">Rental Agreement</font></td>
+ </tr>
+
+  <tr>
+      <td colspan="2"><button type="submit" value="Third" name="confirm"  class="btn btn-warning">Confirm</button></td>
+  <td colspan="2"><u><b>Agreement Lines</u></td>
+  </tr>
+
+
+
+
+
+<tr style="height: 40px">
+    <td style="width:20px;font-family: 'Arial Black'">Reference</td>
+    <td>
+    <input  style="width: 250px;height: 35px"  name="r1" class="form-control">
+    </td>
+       <td style="width:20px;font-family: 'Arial Black'">Period</td>
+    <td>
+    <input  style="width: 250px;height: 35px" type="number" name="r2"  class="form-control">
+    </td>
+</tr>
+
+
+
+
+      <tr style="height: 40px">
+    <td style="width:20px;font-family: 'Arial Black'">Coustemer</td>
+    <td>
+        <select  style="width: 250px;height: 35px" name="r3" class="form-control" >
+            <option value="">Refer Customer</option>
+            {% for x in data %}
+                <option value="{{ x.id }}">{{ x.name }}</option>
+            {% endfor %}
+        </select>
+    </td>
+       <td style="width:20px;font-family: 'Arial Black'">PeriodLength</td>
+    <td>
+    <input  style="width: 250px;height: 35px" type="number" name="r4" class="form-control">
+    </td>
+</tr>
+
+
+
+
+
+      <tr style="height:40px">
+          <td style="width:20px;font-family: 'Arial Black'">Rental Type</td>
+          <td ><select style="width: 250px;height: 35px" name="r5" class="form-control" required >
+          <option value="property">Property</option>
+          <option value="equipment">Equipment</option>
+          <option value="vehicle">vehicle</option>
+          <option value="others">Others</option>
+
+          </select></td>
+          <td style="width:20px;font-family: 'Arial Black'">Rental Amount</td>
+          <td >
+             <input  style="width: 250px;height: 35px" type="number" name="r6" class="form-control"  >
+         </td>
+      </tr>
+
+ <tr style="height:40px">
+          <td style="width:20px;font-family: 'Arial Black'">Item</td>
+          <td ><input  style="width: 250px;height: 35px" type="text" name="r7" class="form-control"  ></td>
+          <td style="width:20px;font-family: 'Arial Black'">Agreement<br>
+          starts on</td>
+          <td ><input  style="width: 250px;height: 35px" type="date" name="r8" class="form-control"  ></td>
+      </tr>
+
+
+      <tr style="height:40px">
+      <td style="width:20px;font-family: 'Arial Black'">Stage</td>
+         <td style="">
+             <select name="r9"  class="form-control"   >
+             <option value="">Stage</option>
+                 <option value="draft">Draft</option>
+                 <option value="completed">Completed</option>
+                 <option value="canceled">Canceled</option>
+             </select>
+
+
+      <tr>
+         <td><button type="submit" value="first" name="confirm" class="btn btn-primary">save</button></td>
+          <td><button type='reset' class="btn btn-light">Cancel</button></td>
+      </tr>
+</table>
+
+
+{% if data2 %}
+   <form action="{% url 'saverentalagreement' %}" method="post" >
+   {% csrf_token %}
+   <table class="table">
+  <thead>
+    <tr bgcolor="#1e90ff">
+      <th colspan="4">Rental Agreement Lines</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Rental Agreement</th>
+      <td><input type="text" name="ral1" class="form-group" value="{{ data2 }}"></td>
+      <td>Payment Amount</td>
+      <td><input type="number" name="ral2" class="form-group" ></td>
+    </tr>
+    <tr>
+      <th scope="row">Date</th>s
+      <td><input type="date" name="ral3" class="form-group" ></td>
+      <td>Staus</td>
+      <td><input type="text" name="ral4" class="form-group"  value="draft"></td>
+    </tr>
+   <tr>
+         <td><button type="submit" value="second" name="confirm" class="btn btn-primary">save</button></td>
+          <td><button type='reset' class="btn btn-light">Cancel</button></td>
+      </tr>
+  </tbody>
+</table>
+</form>
+   </form>
+{% endif %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
